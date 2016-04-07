@@ -1,2 +1,2 @@
 # Dryblow-project
-only a test
+only little scripts
