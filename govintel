@@ -1,0 +1,39 @@
+#!/bin/bash
+
+cpu0=/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+cpu1=/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+cpu2=/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+cpu3=/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+cpu4=/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+cpu5=/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor
+cpu6=/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor
+cpu7=/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor
+
+
+if [ "$1" == "set" ]
+then
+
+	case $2 in
+		"performance") for i in ${cpu0} ${cpu1} ${cpu2} ${cpu3} ${cpu4} ${cpu5} ${cpu6} ${cpu7}
+				do
+					echo "performance" > $i
+				done
+		;;
+		"powersave") for i in ${cpu0} ${cpu1} ${cpu2} ${cpu3} ${cpu4} ${cpu5} ${cpu6} ${cpu7}
+				do
+					echo "powersave" > $i
+				done
+	esac
+elif [ "$1" == "get" ]
+then
+	case $2 in
+		*) for i in ${cpu0} ${cpu1} ${cpu2} ${cpu3} ${cpu4} ${cpu5} ${cpu6} ${cpu7}
+			do
+				cat "$i"
+			done
+	esac
+else
+	echo "usage: govintel set|get [powersave|performance]"
+fi
+
+exit 0
